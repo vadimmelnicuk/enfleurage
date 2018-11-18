@@ -7,12 +7,15 @@
 #include <iostream>
 
 #include "Application.h"
+#include "Log.h"
 
 extern Hazel::Application* Hazel::CreateApplication();
 
 int main(int argc, char** argv)
 {
-    std::cout << "Hazel engine started" << std::endl;
+    Hazel::Log::Init();
+    Hazel::Log::GetCoreLogger()->warn("Initialised log!");
+
     auto app = Hazel::CreateApplication();
     app->Run();
     delete app;
