@@ -14,8 +14,9 @@ extern Hazel::Application* Hazel::CreateApplication();
 int main(int argc, char** argv)
 {
     Hazel::Log::Init();
-    Hazel::Log::GetCoreLogger()->warn("Initialised log!");
+    Hazel::Log::GetCoreLogger()->warn("Initialised log!")
 
+    std::cout << "Hazel engine started" << std::endl;
     auto app = Hazel::CreateApplication();
     app->Run();
     delete app;
