@@ -4,8 +4,8 @@
 
 #include "Application.h"
 
-namespace Hazel
-{
+namespace Hazel {
+
     Application::Application() {
 
     }
@@ -14,8 +14,12 @@ namespace Hazel
 
     }
 
-    void Application::Run()
-    {
-        while (true);
+    void Application::Run() {
+        Window* window = new Window();
+        if (window->Init()) {
+            window->LoadMedia();
+            window->GameLoop();
+            window->Close();
+        }
     }
 }

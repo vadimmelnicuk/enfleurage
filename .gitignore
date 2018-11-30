@@ -1,4 +1,6 @@
 .idea/
 build/
+lib/SDL2
+lib/SDL2_image
 
 .DS_Store

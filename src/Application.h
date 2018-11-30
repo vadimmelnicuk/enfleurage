@@ -4,10 +4,11 @@
 
 #pragma once
 
-namespace Hazel
-{
-    class Application
-    {
+#include "Window.h"
+
+namespace Hazel {
+
+    class Application {
     public:
         Application();
         virtual ~Application();

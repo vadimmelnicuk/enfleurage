@@ -1,9 +1,27 @@
 cmake_minimum_required(VERSION 3.12)
 project(hazel)
-
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_MODULE_PATH "${hazel_SOURCE_DIR}/cmake")
 
-add_library(hazel STATIC src/Application.cpp src/Application.h src/Hazel.h src/EntryPoint.h src/Log.cpp src/Log.h)
+add_library(hazel STATIC src/Application.cpp src/Application.h src/Hazel.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h)
+
+# Link all the MinGW DLLs statically
+target_link_libraries(hazel -static)
+
+# Currently only works on windows and MinGW
+# TODO - setup libraries for OSX
+
+# SDL2 library
+set(SDL2_PATH "${hazel_SOURCE_DIR}/lib/SDL2/i686-w64-mingw32")
+find_package(SDL2 REQUIRED)
+target_include_directories(hazel PUBLIC ${SDL2_INCLUDE_DIR})
+target_link_libraries(hazel ${SDL2_LIBRARY})
+
+# SDL2_image library
+set(SDL2_IMAGE_PATH "${hazel_SOURCE_DIR}/lib/SDL2_image/i686-w64-mingw32")
+find_package(SDL2_image REQUIRED)
+target_include_directories(hazel PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
+target_link_libraries(hazel ${SDL2_IMAGE_LIBRARIES})
 
 # spdlog library
 target_include_directories(hazel PUBLIC lib/spdlog/include)

@@ -11,9 +11,17 @@ namespace Hazel {
 
     void Log::Init()
     {
+        // Create a console for the development purposes
+        AllocConsole();
+        freopen("conin$","r",stdin);
+        freopen("conout$","w",stdout);
+        freopen("conout$","w",stderr);
+
         spdlog::set_pattern("%^[%T] %n: %v%$");
+
         s_CoreLogger = spdlog::stdout_color_mt("HAZEL");
         s_CoreLogger->set_level(spdlog::level::trace);
+
         s_ClientLogger = spdlog::stdout_color_mt("APP");
         s_ClientLogger->set_level(spdlog::level::trace);
     }
