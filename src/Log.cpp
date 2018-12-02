@@ -11,11 +11,11 @@ namespace Hazel {
 
     void Log::Init()
     {
-        // Create a console for the development purposes
-        AllocConsole();
-        freopen("conin$","r",stdin);
-        freopen("conout$","w",stdout);
-        freopen("conout$","w",stderr);
+        // Create a console for the development purposes - only works if windows, but no need for it in osx
+//        AllocConsole();
+//        freopen("conin$","r",stdin);
+//        freopen("conout$","w",stdout);
+//        freopen("conout$","w",stderr);
 
         spdlog::set_pattern("%^[%T] %n: %v%$");
 

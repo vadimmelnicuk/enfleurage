@@ -38,7 +38,7 @@ namespace Hazel {
     bool Window::LoadMedia() {
         bool success = true;
 
-        gCross = SDL_LoadBMP("..\\assets\\cross.bmp");
+        gCross = SDL_LoadBMP("../assets/cross.bmp");
 
         if (gCross == NULL) {
             LOG_CORE_ERROR("Unable to load image {0}! SDL Error: {1}", "cross.bmp", SDL_GetError());

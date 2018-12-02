@@ -6,19 +6,25 @@ set(CMAKE_MODULE_PATH "${hazel_SOURCE_DIR}/cmake")
 add_library(hazel STATIC src/Application.cpp src/Application.h src/Hazel.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h)
 
 # Link all the MinGW DLLs statically
-target_link_libraries(hazel -static)
+# TODO - does not work with OSX
+#target_link_libraries(hazel -static)
 
-# Currently only works on windows and MinGW
-# TODO - setup libraries for OSX
-
-# SDL2 library
-set(SDL2_PATH "${hazel_SOURCE_DIR}/lib/SDL2/i686-w64-mingw32")
+# Load SDL2 library for both Windows and OSX
+IF(APPLE)
+    set(SDL2_PATH "${hazel_SOURCE_DIR}/lib/SDL2/")
+ELSE()
+    set(SDL2_PATH "${hazel_SOURCE_DIR}/lib/SDL2/i686-w64-mingw32")
+ENDIF(APPLE)
 find_package(SDL2 REQUIRED)
 target_include_directories(hazel PUBLIC ${SDL2_INCLUDE_DIR})
 target_link_libraries(hazel ${SDL2_LIBRARY})
 
-# SDL2_image library
-set(SDL2_IMAGE_PATH "${hazel_SOURCE_DIR}/lib/SDL2_image/i686-w64-mingw32")
+# Load SDL2_image library for both Windows and OSX
+IF(APPLE)
+    set(SDL2_IMAGE_PATH "${hazel_SOURCE_DIR}/lib/SDL2_image/")
+ELSE(APPLE)
+    set(SDL2_IMAGE_PATH "${hazel_SOURCE_DIR}/lib/SDL2_image/i686-w64-mingw32")
+ENDIF(APPLE)
 find_package(SDL2_image REQUIRED)
 target_include_directories(hazel PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
 target_link_libraries(hazel ${SDL2_IMAGE_LIBRARIES})
