@@ -3,11 +3,12 @@ project(hazel)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH "${hazel_SOURCE_DIR}/cmake")
 
-add_library(hazel STATIC src/Application.cpp src/Application.h src/Hazel.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h)
+add_library(hazel STATIC src/Application.cpp src/Application.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h src/Hazel.h)
 
-# Link all the MinGW DLLs statically
-# TODO - does not work with OSX
-#target_link_libraries(hazel -static)
+# Link all the MinGW DLLs statically on windows
+IF(NOT APPLE)
+    target_link_libraries(hazel -static)
+ENDIF(NOT APPLE)
 
 # Load SDL2 library for both Windows and OSX
 IF(APPLE)

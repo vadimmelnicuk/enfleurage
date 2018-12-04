@@ -6,23 +6,26 @@
 
 namespace Hazel {
 
-    std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-    std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+    std::shared_ptr<spdlog::logger> Log::msCoreLogger;
+    std::shared_ptr<spdlog::logger> Log::msClientLogger;
 
-    void Log::Init()
-    {
-        // Create a console for the development purposes - only works if windows, but no need for it in osx
-//        AllocConsole();
-//        freopen("conin$","r",stdin);
-//        freopen("conout$","w",stdout);
-//        freopen("conout$","w",stderr);
+    void Log::Init() {
+        // Create a console window for the development purposes in Windows. There is no need for it in OSX.
+        #ifdef _WIN32
+            AllocConsole();
+            freopen("conin$","r",stdin);
+            freopen("conout$","w",stdout);
+            freopen("conout$","w",stderr);
+        #endif
 
         spdlog::set_pattern("%^[%T] %n: %v%$");
 
-        s_CoreLogger = spdlog::stdout_color_mt("HAZEL");
-        s_CoreLogger->set_level(spdlog::level::trace);
+        msCoreLogger = spdlog::stdout_color_mt("HAZEL");
+        msCoreLogger->set_level(spdlog::level::trace);
 
-        s_ClientLogger = spdlog::stdout_color_mt("APP");
-        s_ClientLogger->set_level(spdlog::level::trace);
+        msClientLogger = spdlog::stdout_color_mt("APP");
+        msClientLogger->set_level(spdlog::level::trace);
+
+        LOG_CORE_INFO("Log initialised");
     }
 }

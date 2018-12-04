@@ -11,9 +11,16 @@ namespace Hazel {
     class Application {
     public:
         Application();
-        virtual ~Application();
+        ~Application();
+        bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
         void Run();
+        void HandleEvents();
+        void Update();
+        void Close();
+        inline bool isRunning() { return mRunning; }
+    private:
+        bool mRunning;
+        Window* mWindow;
+        int mCount;
     };
-
-    Application* CreateApplication();
 }

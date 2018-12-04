@@ -9,30 +9,15 @@
 
 namespace Hazel {
 
-    //Key press surfaces constants
-    enum KeyPressSurfaces {
-        KEY_PRESS_SURFACE_DEFAULT,
-        KEY_PRESS_SURFACE_UP,
-        KEY_PRESS_SURFACE_DOWN,
-        KEY_PRESS_SURFACE_LEFT,
-        KEY_PRESS_SURFACE_RIGHT,
-        KEY_PRESS_SURFACE_TOTAL
-    };
-
     class Window {
     public:
         Window();
         ~Window();
-        bool Init();
-        bool LoadMedia();
-        void GameLoop();
+        bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
+        void Render();
         void Close();
-
     private:
-        const int SCREEN_WIDTH = 640;
-        const int SCREEN_HEIGHT = 480;
-        SDL_Window* gWindow = NULL;
-        SDL_Surface* gScreenSurface = NULL;
-        SDL_Surface* gCross = NULL;
+        SDL_Window* mWindow = NULL;
+        SDL_Renderer* mRenderer = NULL;
     };
 }

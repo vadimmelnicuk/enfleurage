@@ -6,76 +6,55 @@
 
 namespace Hazel {
 
-    Window::Window() {
+    Window::Window() {}
 
-    }
+    Window::~Window() {}
 
-    Window::~Window() {
-
-    }
-
-    bool Window::Init() {
+    bool Window::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
         bool success = true;
+        int flags = SDL_WINDOW_SHOWN;
 
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        if (pFullscreen) {
+            flags =  flags | SDL_WINDOW_FULLSCREEN;
+        }
+
+        if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
             LOG_CORE_ERROR("SDL could not initialize! SDL_Error: {0}", SDL_GetError());
             success = false;
         } else {
-            gWindow = SDL_CreateWindow("SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+            LOG_CORE_INFO("SDL initialised");
+            mWindow = SDL_CreateWindow(pTitle, pXPos, pYPos, pWidth, pHeight, flags);
 
-            if (gWindow == NULL) {
+            if (mWindow == NULL) {
                 LOG_CORE_ERROR("Window could not be created! SDL_Error: {0}", SDL_GetError());
                 success = false;
             } else {
-                //Get window surface
-                gScreenSurface = SDL_GetWindowSurface(gWindow);
-            }
-        }
+                LOG_CORE_INFO("SDL window created");
+                mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
 
-        return success;
-    }
-
-    bool Window::LoadMedia() {
-        bool success = true;
-
-        gCross = SDL_LoadBMP("../assets/cross.bmp");
-
-        if (gCross == NULL) {
-            LOG_CORE_ERROR("Unable to load image {0}! SDL Error: {1}", "cross.bmp", SDL_GetError());
-            success = false;
-        }
-
-        return success;
-    }
-
-    void Window::GameLoop() {
-        bool quit = false;
-        SDL_Event e;
-
-        while (!quit) {
-            while (SDL_PollEvent(&e) != 0) {
-                //User requests quit
-                if(e.type == SDL_QUIT) {
-                    quit = true;
+                if (mRenderer == NULL) {
+                    LOG_CORE_ERROR("Renderer could not be created! SDL_Error: {0}", SDL_GetError());
+                    success = false;
+                } else {
+                    LOG_CORE_INFO("SDL renderer created");
+                    SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255);
                 }
             }
-
-            SDL_BlitSurface(gCross, NULL, gScreenSurface, NULL);
-            SDL_UpdateWindowSurface(gWindow);
         }
+
+        return success;
     }
 
-    void Window::Close()
-    {
-        //Deallocate surface
-        SDL_FreeSurface(gCross);
-        gCross = NULL;
+    void Window::Render() {
+        SDL_RenderClear(mRenderer);
+        SDL_RenderPresent(mRenderer);
+    }
 
-        //Destroy window
-        SDL_DestroyWindow(gWindow);
-        gWindow = NULL;
+    void Window::Close() {
+        SDL_DestroyWindow(mWindow);
+        mWindow = NULL;
 
-        //Quit SDL subsystems
-        SDL_Quit();
+        SDL_DestroyRenderer(mRenderer);
+        mRenderer = NULL;
     }
 }
