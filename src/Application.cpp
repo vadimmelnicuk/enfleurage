@@ -7,7 +7,6 @@
 namespace Hazel {
 
     Application::Application() = default;
-
     Application::~Application() = default;
 
     bool Application::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
@@ -23,12 +22,15 @@ namespace Hazel {
             } else {
                 LOG_CORE_INFO("SDL renderer created");
                 SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
+
+                mTextureManager = new TextureManager();
+                mPlayerTexture = mTextureManager->LoadTexture("../assets/darkDirtBlock.png", mRenderer);
             }
         } else {
             success = false;
         }
 
-        mPlayerTexture = this->loadTexture("../assets/darkDirtBlock.png");
+
 
         return success;
     }
@@ -37,9 +39,17 @@ namespace Hazel {
         mRunning = true;
 
         while (mRunning) {
+            mFrameStart = SDL_GetTicks();
+
             this->HandleEvents();
             this->Update();
             this->Render();
+
+            mFrameTime = SDL_GetTicks() - mFrameStart;
+
+            if (FRAME_DELAY > mFrameTime) {
+                SDL_Delay(FRAME_DELAY - mFrameTime);
+            }
         }
 
         this->Close();
@@ -60,7 +70,9 @@ namespace Hazel {
     }
 
     void Application::Update() {
-        mDest.x = 0;
+        mCounter++;
+
+        mDest.x = mCounter;
         mDest.y = 0;
         mDest.h = 64;
         mDest.w = 64;
@@ -74,27 +86,14 @@ namespace Hazel {
         SDL_RenderPresent(mRenderer);
     }
 
-    SDL_Texture* Application::loadTexture(const char* dir) {
-        SDL_Texture* tempTexture = nullptr;
-        SDL_Surface* tempSurface = IMG_Load(dir);
-
-        if (tempSurface == nullptr) {
-            LOG_CORE_ERROR("Texture failed to load! SDL_Error: {0}", SDL_GetError());
-        } else {
-            LOG_CORE_INFO("Texture loaded: {0}", dir);
-            tempTexture = SDL_CreateTextureFromSurface(mRenderer, tempSurface);
-        }
-
-        SDL_FreeSurface(tempSurface);
-
-        return tempTexture;
-    }
-
     void Application::Close() {
         mWindow->Close();
 
         SDL_DestroyRenderer(mRenderer);
         mRenderer = nullptr;
+
+        mTextureManager->Close();
+        mTextureManager = nullptr;
 
         SDL_Quit();
     }

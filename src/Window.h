@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "Log.h"
 #include "SDL.h"
+#include "Log.h"
 
 namespace Hazel {
 

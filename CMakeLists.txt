@@ -3,7 +3,7 @@ project(hazel)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_MODULE_PATH "${hazel_SOURCE_DIR}/cmake")
 
-add_library(hazel STATIC src/Application.cpp src/Application.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h src/Hazel.h)
+add_library(hazel STATIC src/Application.cpp src/Application.h src/Window.cpp src/Window.h src/Log.cpp src/Log.h src/Hazel.h src/TextureManager.cpp src/TextureManager.h src/Object.cpp src/Object.h)
 
 # Link all the MinGW DLLs statically on windows
 IF(NOT APPLE)

@@ -7,7 +7,6 @@
 namespace Hazel {
 
     Window::Window() = default;
-
     Window::~Window() = default;
 
     bool Window::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
