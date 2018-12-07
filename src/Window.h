@@ -14,10 +14,9 @@ namespace Hazel {
         Window();
         ~Window();
         bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
-        void Render();
         void Close();
+        inline SDL_Window* getWindow() { return mWindow; }
     private:
-        SDL_Window* mWindow = NULL;
-        SDL_Renderer* mRenderer = NULL;
+        SDL_Window* mWindow = nullptr;
     };
 }

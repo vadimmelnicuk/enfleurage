@@ -5,6 +5,8 @@
 #pragma once
 
 #include "Window.h"
+#include "SDL.h"
+#include "SDL_image.h"
 
 namespace Hazel {
 
@@ -16,11 +18,15 @@ namespace Hazel {
         void Run();
         void HandleEvents();
         void Update();
+        void Render();
+        SDL_Texture* loadTexture(const char* dir);
         void Close();
         inline bool isRunning() { return mRunning; }
     private:
         bool mRunning;
         Window* mWindow;
-        int mCount;
+        SDL_Renderer* mRenderer;
+        SDL_Texture* mPlayerTexture;
+        SDL_Rect mDest;
     };
 }

@@ -18,7 +18,7 @@ namespace Hazel {
             freopen("conout$","w",stderr);
         #endif
 
-        spdlog::set_pattern("%^[%T] %n: %v%$");
+        spdlog::set_pattern("%^[%H:%M:%S.%e] %n: %v%$");
 
         msCoreLogger = spdlog::stdout_color_mt("HAZEL");
         msCoreLogger->set_level(spdlog::level::trace);
