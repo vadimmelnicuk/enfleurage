@@ -12,9 +12,6 @@ namespace Hazel {
 
     class TextureManager {
     public:
-        TextureManager();
-        ~TextureManager();
-        SDL_Texture* LoadTexture(const char* pDir, SDL_Renderer* pRenderer);
-        void Close();
+        static SDL_Texture* LoadTexture(const char* pDir, SDL_Renderer* pRenderer);
     };
 }

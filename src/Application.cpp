@@ -6,9 +6,6 @@
 
 namespace Hazel {
 
-    Application::Application() = default;
-    Application::~Application() = default;
-
     bool Application::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
         bool success = true;
         mWindow = new Window();
@@ -23,14 +20,12 @@ namespace Hazel {
                 LOG_CORE_INFO("SDL renderer created");
                 SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
 
-                mTextureManager = new TextureManager();
-                mPlayerTexture = mTextureManager->LoadTexture("../assets/darkDirtBlock.png", mRenderer);
+                mObject = new Object(mRenderer, "../assets/darkDirtBlock.png", 0, 0, 1);
+                mObject2 = new Object(mRenderer, "../assets/sprite.png", 64, 64, 1);
             }
         } else {
             success = false;
         }
-
-
 
         return success;
     }
@@ -70,18 +65,15 @@ namespace Hazel {
     }
 
     void Application::Update() {
-        mCounter++;
-
-        mDest.x = mCounter;
-        mDest.y = 0;
-        mDest.h = 64;
-        mDest.w = 64;
+        mObject->Update();
+        mObject2->Update();
     }
 
     void Application::Render() {
         SDL_RenderClear(mRenderer);
 
-        SDL_RenderCopy(mRenderer, mPlayerTexture, nullptr, &mDest);
+        mObject->Render();
+        mObject2->Render();
 
         SDL_RenderPresent(mRenderer);
     }
@@ -91,9 +83,6 @@ namespace Hazel {
 
         SDL_DestroyRenderer(mRenderer);
         mRenderer = nullptr;
-
-        mTextureManager->Close();
-        mTextureManager = nullptr;
 
         SDL_Quit();
     }

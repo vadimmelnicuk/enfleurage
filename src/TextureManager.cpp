@@ -6,9 +6,6 @@
 
 namespace Hazel {
 
-    TextureManager::TextureManager() = default;
-    TextureManager::~TextureManager() = default;
-
     SDL_Texture* TextureManager::LoadTexture(const char *pDir, SDL_Renderer *pRenderer) {
         SDL_Texture* tempTexture = nullptr;
         SDL_Surface* tempSurface = IMG_Load(pDir);
@@ -23,9 +20,5 @@ namespace Hazel {
         SDL_FreeSurface(tempSurface);
 
         return tempTexture;
-    }
-
-    void TextureManager::Close() {
-
     }
 }

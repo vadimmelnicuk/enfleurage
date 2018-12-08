@@ -8,16 +8,17 @@
 #include "SDL_image.h"
 #include "Window.h"
 #include "TextureManager.h"
+#include "Object.h"
 
 namespace Hazel {
 
     class Application {
     public:
         const int FPS = 60;
-        const int FRAME_DELAY = 1000 / 60;
+        const int FRAME_DELAY = 1000 / FPS;
 
-        Application();
-        ~Application();
+        Application() = default;
+        ~Application() = default;
         bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
         void Run();
         void HandleEvents();
@@ -29,12 +30,10 @@ namespace Hazel {
         bool mRunning;
         unsigned int mFrameStart;
         unsigned int mFrameTime;
-
         Window* mWindow;
         SDL_Renderer* mRenderer;
-        TextureManager* mTextureManager;
-        SDL_Texture* mPlayerTexture;
-        SDL_Rect mDest;
+        Object* mObject;
+        Object* mObject2;
         unsigned int mCounter = 0;
     };
 }
