@@ -4,9 +4,9 @@
 
 #include "TextureManager.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
-    SDL_Texture* TextureManager::LoadTexture(const char *pDir, SDL_Renderer *pRenderer) {
+    SDL_Texture* TextureManager::LoadTexture(const char* pDir) {
         SDL_Texture* tempTexture = nullptr;
         SDL_Surface* tempSurface = IMG_Load(pDir);
 
@@ -14,7 +14,7 @@ namespace Hazel {
             LOG_CORE_ERROR("Texture failed to load! SDL_Error: {0}", SDL_GetError());
         } else {
             LOG_CORE_INFO("Texture loaded: {0}", pDir);
-            tempTexture = SDL_CreateTextureFromSurface(pRenderer, tempSurface);
+            tempTexture = SDL_CreateTextureFromSurface(Renderer::GetRenderer(), tempSurface);
         }
 
         SDL_FreeSurface(tempSurface);

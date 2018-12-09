@@ -4,11 +4,10 @@
 
 #include "Object.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
-    Object::Object(SDL_Renderer *pRenderer, const char *pTextureSheet, int pX, int pY, int pScale) {
-        mRenderer = pRenderer;
-        mTexture = TextureManager::LoadTexture(pTextureSheet, mRenderer);
+    Object::Object(const char *pTextureSheet, int pX, int pY, int pScale) {
+        mTexture = TextureManager::LoadTexture(pTextureSheet);
         mX = pX;
         mY = pY;
         mScale = pScale;
@@ -30,6 +29,6 @@ namespace Hazel {
     }
 
     void Object::Render() {
-        SDL_RenderCopy(mRenderer, mTexture, &mSrcRect, &mDestRect);
+        SDL_RenderCopy(Renderer::GetRenderer(), mTexture, &mSrcRect, &mDestRect);
     }
 }

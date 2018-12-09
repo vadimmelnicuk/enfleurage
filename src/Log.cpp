@@ -4,7 +4,7 @@
 
 #include "Log.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     std::shared_ptr<spdlog::logger> Log::msCoreLogger;
     std::shared_ptr<spdlog::logger> Log::msClientLogger;
@@ -20,7 +20,7 @@ namespace Hazel {
 
         spdlog::set_pattern("%^[%H:%M:%S.%e] %n: %v%$");
 
-        msCoreLogger = spdlog::stdout_color_mt("HAZEL");
+        msCoreLogger = spdlog::stdout_color_mt("ENGINE");
         msCoreLogger->set_level(spdlog::level::trace);
 
         msClientLogger = spdlog::stdout_color_mt("APP");

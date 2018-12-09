@@ -5,14 +5,16 @@
 #pragma once
 
 #include "SDL.h"
-#include "Log.h"
-#include "TextureManager.h"
 
-namespace Hazel {
+#include "Renderer.h"
+#include "TextureManager.h"
+#include "Log.h"
+
+namespace Enfleurage {
 
     class Object {
     public:
-        Object(SDL_Renderer* pRenderer, const char* pTextureSheet, int pX, int pY, int pScale);
+        Object(const char* pTextureSheet, int pX, int pY, int pScale);
         ~Object() = default;
         void Update();
         void Render();
@@ -23,6 +25,5 @@ namespace Hazel {
         SDL_Texture* mTexture;
         SDL_Rect mSrcRect;
         SDL_Rect mDestRect;
-        SDL_Renderer* mRenderer;
     };
 }

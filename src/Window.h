@@ -7,7 +7,7 @@
 #include "SDL.h"
 #include "Log.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     class Window {
     public:

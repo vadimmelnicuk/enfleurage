@@ -6,11 +6,13 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+
 #include "Window.h"
+#include "Renderer.h"
 #include "TextureManager.h"
 #include "Object.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     class Application {
     public:
@@ -31,7 +33,6 @@ namespace Hazel {
         unsigned int mFrameStart;
         unsigned int mFrameTime;
         Window* mWindow;
-        SDL_Renderer* mRenderer;
         Object* mObject;
         Object* mObject2;
         unsigned int mCounter = 0;

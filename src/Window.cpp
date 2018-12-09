@@ -4,7 +4,7 @@
 
 #include "Window.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     Window::Window() = default;
     Window::~Window() = default;

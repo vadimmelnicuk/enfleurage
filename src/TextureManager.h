@@ -6,12 +6,14 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+
+#include "Renderer.h"
 #include "Log.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     class TextureManager {
     public:
-        static SDL_Texture* LoadTexture(const char* pDir, SDL_Renderer* pRenderer);
+        static SDL_Texture* LoadTexture(const char* pDir);
     };
 }

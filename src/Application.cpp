@@ -4,24 +4,25 @@
 
 #include "Application.h"
 
-namespace Hazel {
+namespace Enfleurage {
 
     bool Application::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
         bool success = true;
         mWindow = new Window();
 
         if (mWindow->Init(pTitle, pXPos, pYPos, pWidth, pHeight, pFullscreen)) {
-            mRenderer = SDL_CreateRenderer(mWindow->getWindow(), -1, 0);
+            // Init renderer
+            Renderer::Init(mWindow->getWindow());
 
-            if (mRenderer == nullptr) {
+            if (Renderer::GetRenderer() == nullptr) {
                 LOG_CORE_ERROR("Renderer could not be created! SDL_Error: {0}", SDL_GetError());
                 success = false;
             } else {
                 LOG_CORE_INFO("SDL renderer created");
-                SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
+                SDL_SetRenderDrawColor(Renderer::GetRenderer(), 0, 0, 0, 255);
 
-                mObject = new Object(mRenderer, "../assets/darkDirtBlock.png", 0, 0, 1);
-                mObject2 = new Object(mRenderer, "../assets/sprite.png", 64, 64, 1);
+                mObject = new Object("../assets/darkDirtBlock.png", 0, 0, 1);
+                mObject2 = new Object("../assets/sprite.png", 64, 64, 1);
             }
         } else {
             success = false;
@@ -70,19 +71,18 @@ namespace Hazel {
     }
 
     void Application::Render() {
-        SDL_RenderClear(mRenderer);
+        SDL_RenderClear(Renderer::GetRenderer());
 
         mObject->Render();
         mObject2->Render();
 
-        SDL_RenderPresent(mRenderer);
+        SDL_RenderPresent(Renderer::GetRenderer());
     }
 
     void Application::Close() {
         mWindow->Close();
 
-        SDL_DestroyRenderer(mRenderer);
-        mRenderer = nullptr;
+        Renderer::Close();
 
         SDL_Quit();
     }
