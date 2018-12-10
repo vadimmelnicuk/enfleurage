@@ -12,6 +12,10 @@ namespace Enfleurage {
         msRenderer = SDL_CreateRenderer(pWindow, -1, 0);
     }
 
+    void Renderer::Draw(SDL_Texture *pTexture, SDL_Rect pSrcRect, SDL_Rect pDestRect) {
+        SDL_RenderCopy(msRenderer, pTexture, &pSrcRect, &pDestRect);
+    }
+
     void Renderer::Close() {
         SDL_DestroyRenderer(msRenderer);
     }

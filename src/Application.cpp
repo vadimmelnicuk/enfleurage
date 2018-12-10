@@ -23,6 +23,7 @@ namespace Enfleurage {
 
                 mObject = new Object("../assets/darkDirtBlock.png", 0, 0, 1);
                 mObject2 = new Object("../assets/sprite.png", 64, 64, 1);
+                mMap = new Map();
             }
         } else {
             success = false;
@@ -73,6 +74,7 @@ namespace Enfleurage {
     void Application::Render() {
         SDL_RenderClear(Renderer::GetRenderer());
 
+        mMap->Render();
         mObject->Render();
         mObject2->Render();
 

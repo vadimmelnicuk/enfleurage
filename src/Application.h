@@ -11,6 +11,7 @@
 #include "Renderer.h"
 #include "TextureManager.h"
 #include "Object.h"
+#include "Map.h"
 
 namespace Enfleurage {
 
@@ -35,6 +36,7 @@ namespace Enfleurage {
         Window* mWindow;
         Object* mObject;
         Object* mObject2;
+        Map* mMap;
         unsigned int mCounter = 0;
     };
 }

@@ -11,6 +11,7 @@ namespace Enfleurage {
     class Renderer {
     public:
         static void Init(SDL_Window* pWindow);
+        static void Draw(SDL_Texture* pTexture, SDL_Rect pSrcRect, SDL_Rect pDestRect);
         static void Close();
         inline static SDL_Renderer* GetRenderer() { return msRenderer; }
     private:
