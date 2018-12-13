@@ -44,6 +44,7 @@ namespace Enfleurage {
 
             mFrameTime = SDL_GetTicks() - mFrameStart;
 
+            // Sleep if the loop runs faster than 60 FPS
             if (FRAME_DELAY > mFrameTime) {
                 SDL_Delay(FRAME_DELAY - mFrameTime);
             }
@@ -60,6 +61,18 @@ namespace Enfleurage {
                 case SDL_QUIT:
                     mRunning = false;
                     break;
+                case SDL_KEYUP:
+                    switch (event.key.keysym.sym) {
+                        case SDLK_UP:
+                            mObject->shiftY(-50);
+                            break;
+                        case SDLK_DOWN:
+                            mObject->shiftY(50);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -72,6 +85,7 @@ namespace Enfleurage {
     }
 
     void Application::Render() {
+        // Double buffer
         SDL_RenderClear(Renderer::GetRenderer());
 
         mMap->Render();
