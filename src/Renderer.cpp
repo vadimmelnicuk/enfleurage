@@ -16,6 +16,14 @@ namespace Enfleurage {
         SDL_RenderCopy(msRenderer, pTexture, &pSrcRect, &pDestRect);
     }
 
+    void Renderer::Clear() {
+        SDL_RenderClear(msRenderer);
+    }
+
+    void Renderer::Present() {
+        SDL_RenderPresent(msRenderer);
+    }
+
     void Renderer::Close() {
         SDL_DestroyRenderer(msRenderer);
     }

@@ -11,16 +11,16 @@ namespace Enfleurage {
         mX = pX;
         mY = pY;
         mScale = pScale;
-    }
-
-    void Object::Update() {
-        mX++;
-        mY++;
 
         mSrcRect.x = 0;
         mSrcRect.y = 0;
         mSrcRect.w = 64;
         mSrcRect.h = 64;
+    }
+
+    void Object::Update() {
+        mX++;
+        mY++;
 
         mDestRect.x = mX;
         mDestRect.y = mY;

@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "SDL.h"
 #include "SDL_image.h"
 
@@ -17,26 +19,16 @@ namespace Enfleurage {
 
     class Application {
     public:
-        const int FPS = 60;
-        const int FRAME_DELAY = 1000 / FPS;
-
-        Application() = default;
-        ~Application() = default;
-        bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
-        void Run();
-        void HandleEvents();
-        void Update();
-        void Render();
-        void Close();
-        inline bool isRunning() { return mRunning; }
+        static bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen, unsigned int pFPS);
+        static void Close();
+        inline static void Quit() { mRunning = false; };
+        inline static bool isRunning() { return mRunning; }
+        inline static unsigned int GetTicks() { return SDL_GetTicks(); }
+        inline static unsigned int GetFrameDelay() { return mFrameDelay; }
+        inline static void Delay(unsigned int pMs) { SDL_Delay(pMs); }
     private:
-        bool mRunning;
-        unsigned int mFrameStart;
-        unsigned int mFrameTime;
-        Window* mWindow;
-        Object* mObject;
-        Object* mObject2;
-        Map* mMap;
-        unsigned int mCounter = 0;
+        static bool mRunning;
+        static unsigned int mFrameDelay;
+        static Window* mWindow;
     };
 }
