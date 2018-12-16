@@ -17,6 +17,7 @@ namespace Enfleurage {
     }
 
     void Renderer::Clear() {
+        SDL_SetRenderDrawColor(Renderer::GetRenderer(), 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderClear(msRenderer);
     }
 

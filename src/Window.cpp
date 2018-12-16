@@ -6,11 +6,10 @@
 
 namespace Enfleurage {
 
-    Window::Window() = default;
-    Window::~Window() = default;
-
     bool Window::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
         bool success = true;
+        mWidth = pWidth;
+        mHeight = pHeight;
         signed int flags = SDL_WINDOW_SHOWN;
 
         if (pFullscreen) {
@@ -28,7 +27,7 @@ namespace Enfleurage {
                 LOG_CORE_ERROR("Window could not be created! SDL_Error: {0}", SDL_GetError());
                 success = false;
             } else {
-                LOG_CORE_INFO("SDL window created");
+                LOG_CORE_INFO("SDL Window created");
             }
         }
 

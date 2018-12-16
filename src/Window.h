@@ -11,12 +11,16 @@ namespace Enfleurage {
 
     class Window {
     public:
-        Window();
-        ~Window();
+        Window() = default;
+        ~Window() = default;
         bool Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen);
         void Close();
         inline SDL_Window* getWindow() { return mWindow; }
+        inline int getWidth() { return mWidth; }
+        inline int getHeigth() { return mHeight; }
     private:
         SDL_Window* mWindow = nullptr;
+        int mWidth;
+        int mHeight;
     };
 }

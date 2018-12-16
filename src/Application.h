@@ -25,10 +25,11 @@ namespace Enfleurage {
         inline static bool isRunning() { return mRunning; }
         inline static unsigned int GetTicks() { return SDL_GetTicks(); }
         inline static unsigned int GetFrameDelay() { return mFrameDelay; }
+        inline static std::shared_ptr<Window> GetWindow() { return mWindow; }
         inline static void Delay(unsigned int pMs) { SDL_Delay(pMs); }
     private:
         static bool mRunning;
         static unsigned int mFrameDelay;
-        static Window* mWindow;
+        static std::shared_ptr<Window> mWindow;
     };
 }

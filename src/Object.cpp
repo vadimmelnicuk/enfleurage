@@ -6,26 +6,15 @@
 
 namespace Enfleurage {
 
-    Object::Object(const char *pTextureSheet, int pX, int pY, int pScale) {
+    Object::Object(const char *pTextureSheet, int pX, int pY, int pScale) : mX(pX), mY(pY), mScale(pScale) {
         mTexture = TextureManager::LoadTexture(pTextureSheet);
-        mX = pX;
-        mY = pY;
-        mScale = pScale;
-
-        mSrcRect.x = 0;
-        mSrcRect.y = 0;
-        mSrcRect.w = 64;
-        mSrcRect.h = 64;
+        mSrcRect = {0, 0, 64, 64};
     }
 
     void Object::Update() {
         mX++;
         mY++;
-
-        mDestRect.x = mX;
-        mDestRect.y = mY;
-        mDestRect.w = mSrcRect.w * mScale;
-        mDestRect.h = mSrcRect.h * mScale;
+        mDestRect = {mX, mY, mSrcRect.w * mScale, mSrcRect.h * mScale};
     }
 
     void Object::Render() {
