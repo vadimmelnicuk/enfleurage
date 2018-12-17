@@ -37,6 +37,12 @@ namespace Enfleurage {
         mDestRect.h = 64;
     }
 
+    Map::~Map() {
+        TextureManager::FreeTexture(mSand);
+        TextureManager::FreeTexture(mGrass);
+        TextureManager::FreeTexture(mWater);
+    }
+
     void Map::LoadMap(int pMap[10][10]) {
         for (int r = 0; r < 10; r++) {
             for (int c = 0; c < 10; c++) {

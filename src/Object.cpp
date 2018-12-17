@@ -11,9 +11,11 @@ namespace Enfleurage {
         mSrcRect = {0, 0, 64, 64};
     }
 
+    Object::~Object() {
+        TextureManager::FreeTexture(mTexture);
+    }
+
     void Object::Update() {
-        mX++;
-        mY++;
         mDestRect = {mX, mY, mSrcRect.w * mScale, mSrcRect.h * mScale};
     }
 

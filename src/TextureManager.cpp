@@ -7,18 +7,26 @@
 namespace Enfleurage {
 
     SDL_Texture* TextureManager::LoadTexture(const char* pDir) {
-        SDL_Texture* tempTexture = nullptr;
+        SDL_Texture* texture = nullptr;
         SDL_Surface* tempSurface = IMG_Load(pDir);
 
         if (tempSurface == nullptr) {
             LOG_CORE_ERROR("Texture failed to load! SDL_Error: {0}", SDL_GetError());
         } else {
             LOG_CORE_INFO("Texture loaded: {0}", pDir);
-            tempTexture = SDL_CreateTextureFromSurface(Renderer::GetRenderer(), tempSurface);
+            texture = SDL_CreateTextureFromSurface(Renderer::GetRenderer(), tempSurface);
         }
 
         SDL_FreeSurface(tempSurface);
+        tempSurface = nullptr;
 
-        return tempTexture;
+        return texture;
+    }
+
+    void TextureManager::FreeTexture(SDL_Texture* pTexture) {
+        if (pTexture != nullptr) {
+            SDL_DestroyTexture(pTexture);
+            pTexture = nullptr;
+        }
     }
 }

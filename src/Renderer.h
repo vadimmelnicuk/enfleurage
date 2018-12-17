@@ -20,5 +20,3 @@ namespace Enfleurage {
         static SDL_Renderer* msRenderer;
     };
 }
-
-

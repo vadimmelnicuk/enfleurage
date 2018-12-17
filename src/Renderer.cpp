@@ -27,5 +27,6 @@ namespace Enfleurage {
 
     void Renderer::Close() {
         SDL_DestroyRenderer(msRenderer);
+        msRenderer = nullptr;
     }
 }

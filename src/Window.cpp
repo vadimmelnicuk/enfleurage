@@ -6,35 +6,29 @@
 
 namespace Enfleurage {
 
-    bool Window::Init(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) {
-        bool success = true;
-        mWidth = pWidth;
-        mHeight = pHeight;
+    Window::Window(const char* pTitle, int pXPos, int pYPos, int pWidth, int pHeight, bool pFullscreen) : mTitle(pTitle), mXPos(pXPos), mYPos(pYPos), mWidth(pWidth), mHeight(pHeight), mFullscreen(pFullscreen) {
         signed int flags = SDL_WINDOW_SHOWN;
 
-        if (pFullscreen) {
+        if (mFullscreen) {
             flags =  flags | SDL_WINDOW_FULLSCREEN;
         }
 
         if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
             LOG_CORE_ERROR("SDL could not initialize! SDL_Error: {0}", SDL_GetError());
-            success = false;
         } else {
             LOG_CORE_INFO("SDL initialised");
-            mWindow = SDL_CreateWindow(pTitle, pXPos, pYPos, pWidth, pHeight, flags);
+            mWindow = SDL_CreateWindow(mTitle, mXPos, mYPos, mWidth, mHeight, flags);
 
             if (mWindow == nullptr) {
                 LOG_CORE_ERROR("Window could not be created! SDL_Error: {0}", SDL_GetError());
-                success = false;
             } else {
                 LOG_CORE_INFO("SDL Window created");
+                mInitialised = true;
             }
         }
-
-        return success;
     }
 
-    void Window::Close() {
+    Window::~Window() {
         SDL_DestroyWindow(mWindow);
         mWindow = nullptr;
     }

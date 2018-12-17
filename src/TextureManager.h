@@ -15,5 +15,6 @@ namespace Enfleurage {
     class TextureManager {
     public:
         static SDL_Texture* LoadTexture(const char* pDir);
+        static void FreeTexture(SDL_Texture* pTexture);
     };
 }

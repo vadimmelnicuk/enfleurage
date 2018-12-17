@@ -13,7 +13,7 @@ namespace Enfleurage {
     class Map {
     public:
         Map();
-        ~Map() = default;
+        ~Map();
         void LoadMap(int pMap[10][10]);
         void Render();
     private:

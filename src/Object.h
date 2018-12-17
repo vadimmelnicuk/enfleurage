@@ -15,13 +15,16 @@ namespace Enfleurage {
     class Object {
     public:
         Object(const char* pTextureSheet, int pX, int pY, int pScale);
-        ~Object() = default;
+        ~Object();
         void Update();
         void Render();
-        inline void setX(int pX) {mX = pX;}
-        inline void setY(int pY) {mY = pY;}
-        inline void shiftX(int pX) {mX += pX;}
-        inline void shiftY(int pY) {mY += pY;}
+        inline int GetX() { return mX; }
+        inline int GetY() { return mY; }
+        inline int GetScale() { return mScale; }
+        inline void SetX(int pX) {mX = pX;}
+        inline void SetY(int pY) {mY = pY;}
+        inline void ShiftX(int pX) {mX += pX;}
+        inline void ShiftY(int pY) {mY += pY;}
     private:
         int mX;
         int mY;
