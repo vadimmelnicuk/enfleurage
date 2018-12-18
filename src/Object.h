@@ -7,15 +7,15 @@
 #include "SDL.h"
 
 #include "Renderer.h"
-#include "TextureManager.h"
+#include "Texture.h"
 #include "Log.h"
 
 namespace Enfleurage {
 
     class Object {
     public:
-        Object(const char* pTextureSheet, int pX, int pY, int pScale);
-        ~Object();
+        Object(std::shared_ptr<Texture> pTexture, int pX, int pY, int pScale);
+        ~Object() = default;
         void Update();
         void Render();
         inline int GetX() { return mX; }
@@ -29,8 +29,7 @@ namespace Enfleurage {
         int mX;
         int mY;
         int mScale;
-        SDL_Texture* mTexture;
-        SDL_Rect mSrcRect;
+        std::shared_ptr<Texture> mTexture;
         SDL_Rect mDestRect;
     };
 }

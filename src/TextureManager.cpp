@@ -14,6 +14,7 @@ namespace Enfleurage {
             LOG_CORE_ERROR("Texture failed to load! SDL_Error: {0}", SDL_GetError());
         } else {
             LOG_CORE_INFO("Texture loaded: {0}", pDir);
+            SDL_SetColorKey(tempSurface, SDL_TRUE, SDL_MapRGB(tempSurface->format, 0, 0xFF, 0xFF));
             texture = SDL_CreateTextureFromSurface(Renderer::GetRenderer(), tempSurface);
         }
 
