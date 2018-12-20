@@ -9,7 +9,7 @@ namespace Enfleurage {
     SDL_Renderer* Renderer::msRenderer = nullptr;
 
     void Renderer::Init(SDL_Window* pWindow) {
-        msRenderer = SDL_CreateRenderer(pWindow, -1, 0);
+        msRenderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     }
 
     void Renderer::Draw(SDL_Texture *pTexture, SDL_Rect pSrcRect, SDL_Rect pDestRect) {

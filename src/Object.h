@@ -21,6 +21,7 @@ namespace Enfleurage {
         inline int GetX() { return mX; }
         inline int GetY() { return mY; }
         inline int GetScale() { return mScale; }
+        inline std::shared_ptr<Texture> GetTexture() { return mTexture; }
         inline void SetX(int pX) {mX = pX;}
         inline void SetY(int pY) {mY = pY;}
         inline void ShiftX(int pX) {mX += pX;}

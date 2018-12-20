@@ -26,8 +26,8 @@ namespace Enfleurage {
                 LOG_CORE_INFO("SDL Renderer created");
 
                 // Sandbox for the application
-                SDL_Rect viewport = {0, 0, mWindow->GetWidth()/2, mWindow->GetHeigth()/2};
-                SDL_RenderSetViewport(Renderer::GetRenderer(), &viewport);
+//                SDL_Rect viewport = {0, 0, mWindow->GetWidth()/2, mWindow->GetHeigth()/2};
+//                SDL_RenderSetViewport(Renderer::GetRenderer(), &viewport);
 
                 mRunning = true;
             }
