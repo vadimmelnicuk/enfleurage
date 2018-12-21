@@ -8,7 +8,14 @@
 
 namespace Enfleurage {
 
-    Object::Object(std::shared_ptr<Texture> pTexture, int pX, int pY, int pScale) : mTexture(std::move(pTexture)), mX(pX), mY(pY), mScale(pScale) {
+    Object::Object(std::shared_ptr<Texture> pTexture, int pX, int pY, int pScale, double pAngle, SDL_Point* pCenter, SDL_RendererFlip pFlip) :
+    mTexture(std::move(pTexture)),
+    mX(pX),
+    mY(pY),
+    mScale(pScale),
+    mAngle(pAngle),
+    mCenter(pCenter),
+    mFlip(pFlip) {
 
     }
 
@@ -17,6 +24,6 @@ namespace Enfleurage {
     }
 
     void Object::Render() {
-        SDL_RenderCopy(Renderer::GetRenderer(), mTexture->GetTexture(), &mTexture->GetSrcRect(), &mDestRect);
+        SDL_RenderCopyEx(Renderer::GetRenderer(), mTexture->GetTexture(), &mTexture->GetSrcRect(), &mDestRect, mAngle, mCenter, mFlip);
     }
 }
