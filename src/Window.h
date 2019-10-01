@@ -17,6 +17,7 @@ namespace Enfleurage {
         inline bool IsInitialised() { return mInitialised; }
         inline int GetWidth() { return mWidth; }
         inline int GetHeigth() { return mHeight; }
+        inline void SetTitle(const std::string& pTitle) { SDL_SetWindowTitle(mWindow, pTitle.c_str()); }
     private:
         SDL_Window* mWindow = nullptr;
         bool mInitialised = false;

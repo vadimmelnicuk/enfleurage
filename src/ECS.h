@@ -20,4 +20,3 @@ namespace Enfleurage {
         ~ECS() = default;
     };
 }
-
